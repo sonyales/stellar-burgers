@@ -35,3 +35,20 @@
   align-items: center;
   margin: 0 auto;
 }
+
+.navItem {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+}
+
+.navItem:visited {
+  color: inherit;
+}
+
+.navItem:hover {
+  opacity: 0.9;
+}

@@ -7,29 +7,39 @@ import {
   Logo,
   ProfileIcon
 } from '@zlden/react-developer-burger-ui-components';
+import { NavLink } from 'react-router-dom';
 
 export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
   <header className={styles.header}>
     <nav className={`${styles.menu} p-4`}>
       <div className={styles.menu_part_left}>
-        <>
+        <NavLink to='/' className={`${styles.navItem} ${styles.menuItemLeft}`}>
           <BurgerIcon type={'primary'} />
           <p className='text text_type_main-default ml-2 mr-10'>Конструктор</p>
-        </>
-        <>
+        </NavLink>
+        <NavLink
+          to='/feed'
+          className={`${styles.navItem} ${styles.menuItemLeft}`}
+        >
           <ListIcon type={'primary'} />
           <p className='text text_type_main-default ml-2'>Лента заказов</p>
-        </>
+        </NavLink>
       </div>
-      <div className={styles.logo}>
+      <NavLink
+        to='/'
+        className={`${styles.navItem} ${styles.menuItemLeft} ${styles.logo}`}
+      >
         <Logo className='' />
-      </div>
-      <div className={styles.link_position_last}>
+      </NavLink>
+      <NavLink
+        to='/profile'
+        className={`${styles.navItem} ${styles.menuItemLeft} ${styles.link_position_last}`}
+      >
         <ProfileIcon type={'primary'} />
         <p className='text text_type_main-default ml-2'>
           {userName || 'Личный кабинет'}
         </p>
-      </div>
+      </NavLink>
     </nav>
   </header>
 );

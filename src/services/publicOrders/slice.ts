@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { getPublicOrders } from './action';
 import { TOrder } from '@utils-types';
 
-type PublicOrdersState = {
+export type PublicOrdersState = {
   orders: TOrder[];
   feed: {
     total: number;

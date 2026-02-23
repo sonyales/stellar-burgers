@@ -14,7 +14,7 @@ import {
 
 import { selectIngredients } from '../../services/burgerIngredients/slice';
 
-export const OrderInfo: FC = () => {
+export const OrderInfo: FC<{ hideNumber?: boolean }> = ({ hideNumber }) => {
   const dispatch = useDispatch();
   const { number } = useParams<{ number: string }>();
   const orderNumber = Number(number);
@@ -82,5 +82,12 @@ export const OrderInfo: FC = () => {
   if (error) return <div>Ошибка: {error}</div>;
   if (!orderInfo) return <Preloader />;
 
-  return <OrderInfoUI orderInfo={orderInfo} />;
+  return (
+    <OrderInfoUI
+      orderInfo={orderInfo}
+      orderNumberText={
+        hideNumber ? undefined : number ? `#${number}` : undefined
+      }
+    />
+  );
 };

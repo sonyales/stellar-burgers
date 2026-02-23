@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getOrderByNumberApi } from '@api';
 import { TOrder } from '@utils-types';
+import { hasMessage } from '../../utils/func';
 
 export const getOrderByNumber = createAsyncThunk<
   TOrder,
@@ -10,9 +11,13 @@ export const getOrderByNumber = createAsyncThunk<
   try {
     const res = await getOrderByNumberApi(number);
     return res.orders?.[0];
-  } catch (error: any) {
-    return rejectWithValue({
-      message: error?.message ?? 'Cannot find order'
-    });
+  } catch (error: unknown) {
+    const message =
+      error instanceof Error
+        ? error.message
+        : hasMessage(error)
+          ? error.message
+          : 'Cannot find order';
+    return rejectWithValue({ message });
   }
 });

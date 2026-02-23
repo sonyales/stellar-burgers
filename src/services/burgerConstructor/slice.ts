@@ -1,8 +1,8 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, nanoid } from '@reduxjs/toolkit';
 import { TIngredient, TConstructorIngredient } from '@utils-types';
 import { createOrder } from '../createOrder/action';
 
-type BurgerConstructorState = {
+export type BurgerConstructorState = {
   bun: TIngredient | null;
   ingredients: TConstructorIngredient[];
 };
@@ -19,11 +19,17 @@ export const burgerConstructorSlice = createSlice({
     setBun(state, action: PayloadAction<TIngredient>) {
       state.bun = action.payload;
     },
-    addIngredient(state, action: PayloadAction<TIngredient>) {
-      state.ingredients?.push({ ...action.payload, id: crypto.randomUUID() });
+    addIngredient: {
+      reducer(state, action: PayloadAction<TConstructorIngredient>) {
+        state.ingredients.push(action.payload);
+      },
+      prepare(ingredient: TIngredient) {
+        const payload: TConstructorIngredient = { ...ingredient, id: nanoid() };
+        return { payload };
+      }
     },
     removeIngredient(state, action: PayloadAction<string>) {
-      state.ingredients = state.ingredients?.filter(
+      state.ingredients = state.ingredients.filter(
         (i) => i.id !== action.payload
       );
     },

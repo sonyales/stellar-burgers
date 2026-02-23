@@ -14,6 +14,18 @@
   flex-basis: 35%;
 }
 
+.navItem {
+  text-decoration: none;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+}
+
+.navItem:hover {
+  opacity: 0.9;
+}
+
 .link {
   display: flex;
   text-decoration: none;
@@ -36,19 +48,3 @@
   margin: 0 auto;
 }
 
-.navItem {
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-
-  display: flex;
-  align-items: center;
-}
-
-.navItem:visited {
-  color: inherit;
-}
-
-.navItem:hover {
-  opacity: 0.9;
-}

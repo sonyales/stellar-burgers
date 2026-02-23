@@ -9,9 +9,14 @@ import {
   clearOrderModal
 } from '../../services/createOrder/slice';
 import { createOrder } from '../../services/createOrder/action';
+import { selectUserData } from '../../services/userData/slice';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
+  const user = useSelector(selectUserData);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const constructorItems = useSelector(selectBurgerConstructor);
 
@@ -20,7 +25,12 @@ export const BurgerConstructor: FC = () => {
   const orderModalData = useSelector(selectOrderModalData);
 
   const onOrderClick = () => {
-    if (!constructorItems.bun || orderRequest) return;
+    if (orderRequest) return;
+    if (!user) {
+      navigate('/login', { replace: true, state: { from: location } });
+      return;
+    }
+    if (!constructorItems.bun) return;
 
     const orderItems = [
       constructorItems.bun._id,

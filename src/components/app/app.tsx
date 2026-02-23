@@ -6,6 +6,7 @@ import {
   AppHeader,
   Protected,
   Modal,
+  FeedOrderModalRoute,
   OrderInfo,
   IngredientDetails
 } from '@components';
@@ -98,31 +99,19 @@ const App = () => {
           <Routes>
             <Route
               path='/feed/:number'
-              element={
-                <Modal title='Информация о заказе' onClose={onCloseFn}>
-                  <OrderInfo />
-                </Modal>
-              }
+              element={<FeedOrderModalRoute onClose={onCloseFn} />}
             />
             <Route
               path='/ingredients/:id'
               element={
-                <Modal title='Информация о ингредиенте' onClose={onCloseFn}>
+                <Modal title='Детали ингредиента' onClose={onCloseFn}>
                   <IngredientDetails />
                 </Modal>
               }
             />
             <Route
               path='/profile/orders/:number'
-              element={
-                <Protected
-                  component={
-                    <Modal title='Информация о заказе' onClose={onCloseFn}>
-                      <OrderInfo />
-                    </Modal>
-                  }
-                />
-              }
+              element={<FeedOrderModalRoute onClose={onCloseFn} />}
             />
           </Routes>
         )}

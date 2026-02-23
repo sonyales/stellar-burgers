@@ -1,5 +1,6 @@
 import { getFeedsApi, TFeedsResponse } from '@api';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { hasMessage } from '../../utils/func';
 
 export const getPublicOrders = createAsyncThunk<
   TFeedsResponse,
@@ -8,9 +9,13 @@ export const getPublicOrders = createAsyncThunk<
 >('publicOrders/getPublicOrders', async (_, { rejectWithValue }) => {
   try {
     return await getFeedsApi();
-  } catch (error: any) {
-    return rejectWithValue({
-      message: error?.message ?? 'Cannot find public orders'
-    });
+  } catch (error: unknown) {
+    const message =
+      error instanceof Error
+        ? error.message
+        : hasMessage(error)
+          ? error.message
+          : 'Cannot find public orders';
+    return rejectWithValue({ message });
   }
 });

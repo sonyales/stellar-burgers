@@ -33,8 +33,7 @@ import {
 import { getUser } from '../../services/userData/action';
 
 const App = () => {
-  // запрос массива ингридиентов в юзэффекте диспатчится экшен на запрос массива ингридиентов,
-
+ 
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();

@@ -54,7 +54,6 @@ describe('Тестирование конструктора бургера -- м
   })
 
   it('Создание заказа', () => {
-    // ВАЖНО: делаем новый визит, чтобы токены были ДО загрузки приложения
     cy.intercept('POST', '**/orders*', (req) => {
       expect(req.body.ingredients).to.be.an('array').and.not.to.be.empty
       req.reply({ fixture: 'order.json', delayMs: 800 })

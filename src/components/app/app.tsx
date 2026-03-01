@@ -33,7 +33,6 @@ import {
 import { getUser } from '../../services/userData/action';
 
 const App = () => {
- 
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
